@@ -330,6 +330,13 @@ static int l_ngl_texture_update(lua_State *L) {
     return 0;
 }
 
+static int l_ngl_texture_update_from_file(lua_State *L) {
+    ngl_texture *texture = l_to_ngl_texture(L, 1);
+    const char *filename = lua_tostring(L,2);
+    ngl_texture_update_from_file(texture, filename);
+    return 0;
+}
+
 static int l_ngl_texture_free(lua_State *L) {
     ngl_texture *texture = l_to_ngl_texture(L, 1);
     free(texture);
@@ -1119,6 +1126,7 @@ static lua_State *l_init() {
     l_register_function(L, "ngl_texture_new", l_ngl_texture_new);
     l_register_function(L, "ngl_texture_new_from_file", l_ngl_texture_new_from_file);
     l_register_function(L, "ngl_texture_update", l_ngl_texture_update);
+    l_register_function(L, "ngl_texture_update_from_file", l_ngl_texture_update_from_file);
     l_register_function(L, "ngl_model_new", l_ngl_model_new);
     l_register_function(L, "ngl_model_new_with_buffer", l_ngl_model_new_with_buffer);
     l_register_function(L, "ngl_model_new_grid_points", l_ngl_model_new_grid_points);

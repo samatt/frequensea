@@ -195,6 +195,22 @@ ngl_texture *ngl_texture_new_from_file(const char *file_name, ngl_shader *shader
     free(image_data);
     return texture;
 }
+//SM MOD: Update the texture from image
+void ngl_texture_update_from_file(ngl_texture *texture,const char *file_name ) {
+    int width, height, channels;
+    uint8_t *image_data = stbi_load(file_name, &width, &height, &channels, 4);
+    if (!image_data) {
+        fprintf (stderr, "ERROR: could not load texture %s\n", file_name);
+        // exit(1);
+    }
+    else{
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image_data);
+        NGL_CHECK_ERROR();
+        free(image_data);
+        NGL_CHECK_ERROR();
+    }
+}
+
 
 // Update the texture with the given data.
 // Channels is the number of color channels. 1 = red only, 2 = red/green, 3 = r/g/b, 4 = r/g/b/a.

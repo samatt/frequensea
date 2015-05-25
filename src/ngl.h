@@ -112,4 +112,6 @@ ngl_font *ngl_font_new(const char *file_name, const int font_size);
 void ngl_font_draw(ngl_font *font, const char *text, const double x, const double y, const double alpha);
 void ngl_font_free(ngl_font *font);
 
+//SM MOD
+void ngl_texture_update_from_file(ngl_texture *texture,const char *file_name );
 #endif // NGL_H
